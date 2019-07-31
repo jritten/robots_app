@@ -14,7 +14,7 @@
 * Run seed file
     * `node_modules/.bin/sequelize db:seed:all`
 * Check local DB
-    * `sqlite3 database.sqlite3`
+    * `sqlite3 ../db/database.sqlite3`
     * `select * from robots;`
 * Add DB/models to `app.js`
     * `var db = require('./models');`
