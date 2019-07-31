@@ -18,7 +18,7 @@
     * `select * from robots;`
 * Add DB/models to `app.js`
     * `var db = require('./models');`
-* Remove knex calls and db directory
+* Remove `knex` calls and db directory
 * Add new model calls to controller
 * Run server
     * `npm start`
