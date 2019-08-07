@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session'); // ADDITION! enables session storage; required for flash messages
 var flash = require('connect-flash'); // ADDITION! enables flash messages
 var moment = require('moment-timezone'); // ADDITION! enables date string formatting
+var db = require('./models');
 
 var home_routes = require('./app/controllers/home_controller'); // EDIT! recognizes the home controller file, app/controllers/home_controller. was: var routes = require('./routes/index');
 var robot_routes = require('./app/controllers/robots_controller'); // EDIT! recognizes the robots controller file, app/controllers/robots_controller. was: var users = require('./routes/users');

@@ -14,7 +14,8 @@ router.get('/robots', function(req, res, next) {
     return models.Robot.findAll()
         .then((robots) => {
             console.log(robots);
-            res.send(robots)
+            // res.send(robots);
+            res.render('../views/robots/index.ejs', { robots: robots });
         })
         .catch((err) => {
             console.log('There was an error querying robots', JSON.stringify(err))
@@ -44,30 +45,51 @@ router.post('/robots', function(req, res, next) {
             robot: {name: robot_name, description: robot_description} // pass-back attempted values to the form in case one was not blank
         });
     } else {
-        // knex('robots')
-        //     .where({name: robot_name}) // look-up robot by unique name
-        //     .then(function(bots){
-        //         if (bots.length > 0) {
-        //             var bot = bots[0];
-        //             console.log(bot)
-        //             req.flash('danger', 'Found an Existing Robot named '+robot_name );
-        //             res.render('robots/new', {
-        //                 page_title: 'Add a new Robot',
-        //                 form_action: create_robot_path,
-        //                 robot: {name: robot_name, description: robot_description} // pass-back attempted values to the form in case one was not blank
-        //             });
-        //         } else {
-        //             knex('robots')
-        //                 .insert([{'name': robot_name, 'description': robot_description}], 'id')
-        //                 .then(function(bot_id){
-        //                     console.log(bot_id)
-        //                     req.flash('info', 'Created a New Robot named '+robot_name );
-        //                     res.redirect('/robots')
-        //             });
-        //         }
-        //     });
+        return models.Robot.findAll()
+            var robot = models.Robot.findOne({name: robot_name})
+            // .where({name: robot_name}) // look-up robot by unique name
+            .then((robot) => {
+                if (robot.length > 0) {
+                    var bot = bots[0];
+                    console.log(bot)
+                    req.flash('danger', 'Found an Existing Robot named '+robot_name );
+                    res.render('robots/new', {
+                        page_title: 'Add a new Robot',
+                        form_action: create_robot_path,
+                        robot: {name: robot_name, description: robot_description} // pass-back attempted values to the form in case one was not blank
+                    });
+                } else {
+                    return models.Robot.findAll()
+                        .then((robots) => {
+                            console.log(robots);
+                            // res.send(robots);
+                            res.insert([{'name': robot_name, 'description': robot_description}], 'id')
+                        })
+                        .then(function(bot_id){
+                            console.log(bot_id)
+                            req.flash('info', 'Created a New Robot named '+robot_name );
+                            res.redirect('/robots')
+                        });
+                }
+            });
     }
 });
+    //     // Create a Note
+    //     const new_robot = new Robot({
+    //         name: robot_name,
+    //         description: robot_description
+    //     });
+
+    //     // Save Note in the database
+    //     new_robot.save()
+    //     .then(data => {
+    //         res.send(data);
+    //     }).catch(err => {
+    //         res.status(500).send({
+    //             message: err.message || "Some error occurred while creating the Note."
+    //         });
+    //     });
+    // }
 
 /* NEW */
 // this must come above the SHOW action else express will think the word 'new' is the :id
