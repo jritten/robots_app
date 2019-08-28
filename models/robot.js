@@ -9,3 +9,9 @@ module.exports = (sequelize, DataTypes) => {
   };
   return Robot;
 };
+
+// add helper methods to sequelize models
+// models.Robot.average
+// helper or model
+// put average on shoe isntance itself
+// calculate average on update, save to shoe instance
